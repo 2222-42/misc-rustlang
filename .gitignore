@@ -7,3 +7,4 @@
 # Executables
 *.exe
 chapter01/hello_world/main
+target/
