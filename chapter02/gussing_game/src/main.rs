@@ -1,7 +1,14 @@
+extern crate rand;
+
+use rand::Rng;
 use std::io;
 
 fn main() {
     println!("Guess the number!");
+    let secret_number = rand::thread_rng().gen_range(1, 101);
+
+    println!("The secret number is: {}", secret_number); // should erase after implementation
+
     println!("Please input your guess.");
     let mut guess = String::new();
 
