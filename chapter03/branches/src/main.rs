@@ -1,5 +1,7 @@
 fn main() {
-    let number = 6;
+    let condition = true;
+
+    let number = if condition { 5 } else { 6 };
 
     if number % 4 == 0 {
         println!("number is divisible by 4");
