@@ -13,4 +13,9 @@ fn main() {
     let s2 = s1;
     // println!("The value of s1 is {}", s1);
     println!("The value of s2 is {}", s2);
+
+    let s3 = String::from("world");
+    let s4 = s3.clone();
+    println!("The value of s3 is {}", s3);
+    println!("The value of s4 is {}", s4);
 }
