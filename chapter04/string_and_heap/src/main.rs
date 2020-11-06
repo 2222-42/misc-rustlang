@@ -18,4 +18,19 @@ fn main() {
     let s4 = s3.clone();
     println!("The value of s3 is {}", s3);
     println!("The value of s4 is {}", s4);
+
+    let s = String::from("hello");
+    takes_ownership(s);
+    // println!("{}", s);
+
+    makes_copy(x);
+    println!("{}", x);
+}
+
+fn takes_ownership(some_string: String) {
+    println!("{}", some_string);
+}
+
+fn makes_copy(some_integer: i32) {
+    println!("{}", some_integer);
 }
