@@ -18,6 +18,9 @@ fn main() {
     println!("{}", s);
 
     mut_and_immut_borrow();
+
+    let reference_to_nothing = dangle();
+    println!("{}", reference_to_nothing);
 }
 
 fn calculate_length(s: &String) -> usize {
@@ -37,4 +40,10 @@ fn mut_and_immut_borrow() {
     println!("{}", r2);
     // change(r3);
     // println!("{}", s);
+}
+
+fn dangle() -> String {
+    let s = String::from("hello");
+    // &s
+    s
 }
