@@ -1,7 +1,10 @@
 fn main() {
-    let mut s = String::from("Hello world!");
+    let mut s = String::from("hello world");
     let i = first_word(&s);
     println!("The length of first word is :{}", i);
+    let world = &s[6..];
+    println!("{}", world);
+    println!("{}", &s[..]);
 
     s.clear();
     println!("The length of first word is :{}", i);
