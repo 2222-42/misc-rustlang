@@ -16,6 +16,12 @@ fn main() {
     println!("The first word is: {}", word);
     let word = first_word(my_string_literal);
     println!("The first word is: {}", word);
+
+    let a = [1, 2, 3, 4, 5];
+    let slice = &a[1..3];
+    for (_, &item) in slice.iter().enumerate() {
+        println!("{}", item)
+    }
 }
 
 fn first_word(s: &str) -> &str {
