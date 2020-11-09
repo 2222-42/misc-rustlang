@@ -8,14 +8,14 @@ fn main() {
     println!("{}", world);
     println!("{}", &s[..]);
 
+    s.clear();
+    // println!("The first word is :{}", word);
+
     let my_string_literal = "hello world";
     let word = first_word(&my_string_literal[..]);
     println!("The first word is: {}", word);
     let word = first_word(my_string_literal);
     println!("The first word is: {}", word);
-
-    s.clear();
-    // println!("The first word is :{}", word);
 }
 
 fn first_word(s: &str) -> &str {
