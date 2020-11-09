@@ -30,6 +30,20 @@ fn main() {
     let origin = Point(0, 0, 0);
     println!("{}", black.0);
     println!("{}", origin.0);
+
+    // struct NotOwnedUser {
+    //     username: &str,
+    //     email: &str,
+    //     sign_in_count: u64,
+    //     active: bool,
+    // };
+
+    // let fakeUser = NotOwnedUser {
+    //     email: "someone@example.com",
+    //     username: "fake",
+    //     sign_in_count: 1,
+    //     active: false,
+    // };
 }
 
 fn build_user(email: String, username: String) -> User {
