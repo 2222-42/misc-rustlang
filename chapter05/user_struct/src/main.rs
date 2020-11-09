@@ -10,6 +10,16 @@ fn main() {
     println!("{}", user1.username);
     user1.email = String::from("test2@example.com");
     println!("{}", user1.email);
+
+    let user2 = User {
+        email: String::from("test@example.com"),
+        username: String::from("tester2"),
+        ..user1
+    };
+    println!("user2's username: {}", user2.username);
+    println!("user2's email: {}", user2.email);
+    println!("user2's sign_in_count: {}", user2.sign_in_count);
+    println!("user2's active: {}", user2.active);
 }
 
 fn build_user(email: String, username: String) -> User {
