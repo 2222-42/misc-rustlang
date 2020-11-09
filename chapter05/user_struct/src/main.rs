@@ -8,6 +8,8 @@ struct User {
 struct Color(i32, i32, i32);
 struct Point(i32, i32, i32);
 
+struct UnitStruct();
+
 fn main() {
     let mut user1 = build_user(String::from("test@example.com"), String::from("tester"));
     println!("{}", user1.username);
