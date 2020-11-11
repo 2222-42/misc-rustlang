@@ -44,6 +44,10 @@ fn main() {
     //     sign_in_count: 1,
     //     active: false,
     // };
+    let p1 = CartesianPoint { x: 0.0, y: 0.0 };
+    let p2 = CartesianPoint { x: 5.0, y: 6.5 };
+    p1.distance(&p2);
+    (&p1).distance(&p2);
 }
 
 fn build_user(email: String, username: String) -> User {
@@ -52,5 +56,20 @@ fn build_user(email: String, username: String) -> User {
         username,
         active: true,
         sign_in_count: 1,
+    }
+}
+
+#[derive(Debug, Copy, Clone)]
+struct CartesianPoint {
+    x: f64,
+    y: f64,
+}
+
+impl CartesianPoint {
+    fn distance(&self, other: &CartesianPoint) -> f64 {
+        let x_squared = f64::powi(other.x - self.x, 2);
+        let y_squared = f64::powi(other.y - self.y, 2);
+
+        f64::sqrt(x_squared + y_squared)
     }
 }
