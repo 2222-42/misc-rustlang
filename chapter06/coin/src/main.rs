@@ -73,6 +73,15 @@ fn value_in_cents(coin: Coin) -> u32 {
         }
     }
 }
+
+fn count_coin(coin: &Coin, count: &mut i32) {
+    if let Coin::Quarter(state) = coin {
+        println!("State quarter from: {:?}!", state);
+    } else {
+        *count += 1;
+    }
+}
+
 fn main() {
     let coin = Coin::Nickel;
     println!("{}", value_in_cents(coin));
@@ -85,6 +94,11 @@ fn main() {
     let six = plus_one(five);
     let none = plus_one(None);
 
+    let coin = Coin::Dime;
+    let mut count = 0;
+    count_coin(&coin, &mut count);
+    println!("count: {}", count);
+
     let some_u8_value = 0u8;
     match some_u8_value {
         1 => println!("one"),
@@ -92,6 +106,14 @@ fn main() {
         5 => println!("five"),
         7 => println!("seven"),
         _ => (),
+    }
+
+    let some_u8_value = Some(0u8);
+    if let Some(0) = some_u8_value {
+        println!("zero");
+    }
+    if let Some(3) = some_u8_value {
+        println!("three");
     }
 }
 
