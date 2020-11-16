@@ -43,7 +43,7 @@ mod back_of_house {
 }
 
 // use crate::front_of_house::hosting;
-use self::front_of_house::hosting;
+use self::front_of_house::hosting; //add_to_waitlist();
 
 pub fn eat_at_restaurant() {
     let mut meal = back_of_house::Breakfast::summer("Rye");
@@ -62,6 +62,17 @@ pub fn eat_at_restaurant() {
     // front_of_house::hosting::add_to_waitlist();
     hosting::add_to_waitlist();
     hosting::add_to_waitlist();
+}
+
+use std::fmt;
+use std::io;
+
+fn function1() -> fmt::Result {
+    Ok(())
+}
+
+fn function2() -> io::Result<()> {
+    Ok(())
 }
 
 #[cfg(test)]
