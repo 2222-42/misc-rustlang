@@ -34,4 +34,6 @@ fn main() {
     println!("{}", s2);
     println!("{}", s3);
     println!("{}", s);
+
+    // let t = s[0];
 }
