@@ -1,4 +1,15 @@
+enum SpreadsheetCell {
+    Int(i32),
+    Float(f64),
+    Text(String),
+}
+
 fn main() {
+    let row = vec![
+        SpreadsheetCell::Int(3),
+        SpreadsheetCell::Text(String::from("blue")),
+        SpreadsheetCell::Float(10.12),
+    ];
     let v: Vec<i32> = Vec::new();
     {
         let v2 = vec![1, 2, 3, 4, 5];
@@ -17,8 +28,12 @@ fn main() {
     mv.push(6);
     mv.push(7);
     mv.push(5);
+    mv.pop();
     for i in &mut mv {
         *i += 50;
+    }
+    for i in &mv {
+        println!("{}", i);
     }
 
     let first = &mv[0];
