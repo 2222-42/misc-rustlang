@@ -36,8 +36,12 @@ fn main() {
     println!("{}", s);
     let len = String::from("Hola").len();
     println!("{}", len);
-    let hello = String::from("Здравствуйте")
+    let hello = String::from("Здравствуйте");
     let len = hello.len();
     println!("{}", len);
     // let t = &hello[0];
+    let s1 = &hello[0..4];
+    println!("{}", s1);
+    // let s2 = &hello[0..1];
+    // println!("{}", s2);
 }
