@@ -10,5 +10,9 @@ fn main() {
         sum += *elem
     }
     let mean = sum / length;
-    println!("Hello, world!{}", mean);
+    println!("mean is {}", mean);
+
+    vector.sort();
+    let median = vector[(length / 2) - 1];
+    println!("median is {}", median);
 }
