@@ -53,10 +53,13 @@ fn parse_input(order: String, members: &mut Vec<Employee>) {
             add_member(name, department, members);
         }
         "Show" => {
-            if let "by" = order_map[1] {
-                let department = order_map[2].to_string();
-                show_members_by_department(department, members);
-            } else {
+            let second_argument = order_map.get(1);
+            match second_argument {
+                Some(&"by") => {
+                    let department = order_map[2].to_string();
+                    show_members_by_department(department, members);
+                }
+                _ => show_members(members),
             }
         }
         _ => (),
@@ -66,7 +69,6 @@ fn parse_input(order: String, members: &mut Vec<Employee>) {
 fn add_member(name: String, department: String, members: &mut Vec<Employee>) {
     let person = Employee { name, department };
     person.enter_member(members);
-    println!("{:?}", members)
 }
 
 fn show_members_by_department(department: String, members: &mut Vec<Employee>) {
@@ -79,9 +81,16 @@ fn show_members_by_department(department: String, members: &mut Vec<Employee>) {
     println!("{:?}", filtered_members);
 }
 
+fn show_members(members: &mut Vec<Employee>) {
+    members.sort_by(|a, b| a.department.cmp(&b.department).then(a.name.cmp(&b.name)));
+    println!("{:?}", members);
+}
+
 /*
 Add Nancy to CS
-Add Irie to Dev
+Add Irice to Dev
 Add Alice to CS
 Add Bob to CS
+Show by Dev
+Show
 */
