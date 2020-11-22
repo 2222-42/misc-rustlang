@@ -1,6 +1,6 @@
 use std::io;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 struct Employee {
     name: String,
     department: String,
@@ -49,8 +49,15 @@ fn parse_input(order: String, members: &mut Vec<Employee>) {
     match command {
         "Add" => {
             let name = order_map[1].to_string();
-            let department = order_map[3].to_string();
+            let department = order_map[2].to_string();
             add_member(name, department, members);
+        }
+        "Show" => {
+            if let "by" = order_map[1] {
+                let department = order_map[3].to_string();
+                show_members_by_department(department, members);
+            } else {
+            }
         }
         _ => (),
     }
@@ -60,4 +67,14 @@ fn add_member(name: String, department: String, members: &mut Vec<Employee>) {
     let person = Employee { name, department };
     person.enter_member(members);
     println!("{:?}", members)
+}
+
+fn show_members_by_department(department: String, members: &mut Vec<Employee>) {
+    let filtered_members: Vec<Employee> = members
+        .iter()
+        .filter(|&k| k.department == department)
+        .cloned()
+        .collect();
+    println!("{:?}", filtered_members);
+    //
 }
