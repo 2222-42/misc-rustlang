@@ -49,12 +49,12 @@ fn parse_input(order: String, members: &mut Vec<Employee>) {
     match command {
         "Add" => {
             let name = order_map[1].to_string();
-            let department = order_map[2].to_string();
+            let department = order_map[3].to_string();
             add_member(name, department, members);
         }
         "Show" => {
             if let "by" = order_map[1] {
-                let department = order_map[3].to_string();
+                let department = order_map[2].to_string();
                 show_members_by_department(department, members);
             } else {
             }
@@ -70,11 +70,18 @@ fn add_member(name: String, department: String, members: &mut Vec<Employee>) {
 }
 
 fn show_members_by_department(department: String, members: &mut Vec<Employee>) {
-    let filtered_members: Vec<Employee> = members
+    let mut filtered_members: Vec<Employee> = members
         .iter()
         .filter(|&k| k.department == department)
         .cloned()
         .collect();
+    filtered_members.sort_by(|a, b| a.name.cmp(&b.name));
     println!("{:?}", filtered_members);
-    //
 }
+
+/*
+Add Nancy to CS
+Add Irie to Dev
+Add Alice to CS
+Add Bob to CS
+*/
