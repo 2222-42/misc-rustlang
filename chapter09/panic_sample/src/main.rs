@@ -21,12 +21,9 @@ fn read_username_from_file() -> Result<String, io::Error> {
 }
 
 fn read_username_from_file_use_question() -> Result<String, io::Error> {
-    let mut f = File::open("hello.txt")?;
-
-    println!("not failed on reading.");
     let mut s = String::new();
 
-    f.read_to_string(&mut s)?;
+    File::open("hello.txt")?.read_to_string(&mut s)?;
     Ok(s)
 }
 
@@ -55,12 +52,12 @@ fn main() {
     let result = read_username_from_file();
     match result {
         Ok(v) => println!("use name is {}",v),
-        Err(e) => {println!("There was a problem opening the file: {:?}", e);}
+        Err(e) => {panic!("There was a problem opening the file: {:?}", e);}
     }
 
     let result = read_username_from_file_use_question();
     match result {
         Ok(v) => println!("use name is {}",v),
-        Err(e) => {println!("There was a problem opening the file: {:?}", e)}
+        Err(e) => {panic!("There was a problem opening the file: {:?}", e)}
     }
 }
