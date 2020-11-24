@@ -19,6 +19,7 @@ fn read_username_from_file() -> Result<String, io::Error> {
         Err(e) => Err(e),
     }
 }
+
 fn main() {
     // panic!("crash and burn");
     // let v = vec![1, 2, 3];
@@ -27,7 +28,7 @@ fn main() {
     let f = File::open("hello.txt");
     /*= note: expected type `u32`
     found enum `std::result::Result<File, std::io::Error>`*/
-    let f = match f {
+    let _f = match f {
         Ok(file) => file,
         Err(ref error) if error.kind() == ErrorKind::NotFound => match File::create("hello.txt") {
             Ok(fc) => fc,
