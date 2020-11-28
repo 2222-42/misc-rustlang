@@ -1,4 +1,4 @@
-use media_aggregator::{self, NewsArticle, Summary, Tweet};
+use media_aggregator::{self, notify, NewsArticle, Summary, Tweet};
 
 fn main() {
     let tweet = Tweet {
@@ -19,4 +19,7 @@ fn main() {
         ),
     };
     println!("New articl earrive: {}", article.summarize());
+
+    notify(&tweet);
+    notify(&article);
 }
