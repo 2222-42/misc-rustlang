@@ -1,12 +1,7 @@
-use media_aggregator::{self, notify, NewsArticle, Summary, Tweet};
+use media_aggregator::{self, notify, return_summarizable, NewsArticle, Summary};
 
 fn main() {
-    let tweet = Tweet {
-        username: String::from("horse_ebook"),
-        content: String::from("of course, as you probably already know, people"),
-        reply: false,
-        retweet: false,
-    };
+    let tweet = return_summarizable(false);
     println!("1 new tweet: {}", tweet.summarize());
 
     let article = NewsArticle {
@@ -20,6 +15,5 @@ fn main() {
     };
     println!("New articl earrive: {}", article.summarize());
 
-    notify(&tweet);
     notify(&article);
 }
