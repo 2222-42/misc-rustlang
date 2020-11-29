@@ -12,7 +12,10 @@ pub fn notify(item: &(impl Summary + Display)) {
 }
 
 // pub fn notify_composite(item1: &impl Summary, item2: &impl Summary)
-pub fn notify_composite<T: Summary>(item1: &T, item2: &T) {
+pub fn notify_composite<T>(item1: &T, item2: &T)
+where
+    T: Summary + Display,
+{
     println!("Breaking news! {}", item1.summarize());
     println!("Breaking news! {}", item2.summarize());
 }
