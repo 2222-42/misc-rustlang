@@ -1,3 +1,5 @@
+use std::fmt::{self, Display};
+
 pub trait Summary {
     fn summarize_author(&self) -> String;
     fn summarize(&self) -> String {
@@ -5,8 +7,14 @@ pub trait Summary {
     }
 }
 
-pub fn notify(item: &impl Summary) {
+pub fn notify(item: &(impl Summary + Display)) {
     println!("Breaking news! {}", item.summarize());
+}
+
+// pub fn notify_composite(item1: &impl Summary, item2: &impl Summary)
+pub fn notify_composite<T: Summary>(item1: &T, item2: &T) {
+    println!("Breaking news! {}", item1.summarize());
+    println!("Breaking news! {}", item2.summarize());
 }
 
 pub struct NewsArticle {
@@ -14,6 +22,12 @@ pub struct NewsArticle {
     pub location: String,
     pub author: String,
     pub content: String,
+}
+
+impl Display for NewsArticle {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "headline: {}, by {}", self.headline, self.author)
+    }
 }
 
 impl Summary for NewsArticle {
@@ -30,6 +44,12 @@ pub struct Tweet {
     pub content: String,
     pub reply: bool,
     pub retweet: bool,
+}
+
+impl Display for Tweet {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "content: {}, by {}", self.content, self.username)
+    }
 }
 
 impl Summary for Tweet {
