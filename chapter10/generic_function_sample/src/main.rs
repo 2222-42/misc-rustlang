@@ -22,13 +22,13 @@ fn largest_char(list: &[char]) -> char {
     largest
 }
 
-fn largest<T>(list: &[T]) -> T
+fn largest<T>(list: &[T]) -> &T
 where
-    T: PartialOrd + Copy,
+    T: PartialOrd,
 {
-    let mut largest = list[0];
+    let mut largest = &list[0];
 
-    for &number in list.iter() {
+    for number in list.iter() {
         if number > largest {
             largest = number;
         }
@@ -42,7 +42,7 @@ fn main() {
 
     let result = largest(&number_list);
     println!("The largest number is {}", result);
-    assert_eq!(result, 100);
+    assert_eq!(*result, 100);
 
     let char_list = vec!['y', 'm', 'a', 'q'];
 
