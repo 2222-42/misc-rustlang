@@ -11,16 +11,28 @@ pub struct Guess {
 
 impl Guess {
     pub fn new(value: u32) -> Guess {
-        if value < 1 || value > 100 {
-            panic!("The secret number will be between 1 and 100, got: {}", value);
-        } 
-        Guess {
-            value,
+        if value < 1 {
+            panic!(
+                "The secret number will be between 1 and 100, got: {}",
+                value
+            );
         }
+        Guess { value }
     }
 
     pub fn value(&self) -> u32 {
         self.value
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    #[should_panic]
+    fn test_greater_than_100() {
+        Guess::new(200);
     }
 }
 
