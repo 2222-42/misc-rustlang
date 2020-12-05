@@ -45,6 +45,10 @@ mod tests {
     // fn another() {
     //     panic!("Make this test fail")
     // }
+
+    #[test]
+    #[ignore = "reason"]
+    fn test_ignored() {}
 }
 
 #[cfg(test)]
