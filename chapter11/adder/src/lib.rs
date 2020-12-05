@@ -21,6 +21,7 @@ mod tests {
     //     let value = prints_and_retunrs_10(5);
     //     assert_eq!(5, value)
     // }
+
     #[test]
     fn it_works() -> Result<(), String> {
         if 2 + 2 == 4 {
@@ -44,4 +45,24 @@ mod tests {
     // fn another() {
     //     panic!("Make this test fail")
     // }
+}
+
+#[cfg(test)]
+mod another {
+    use super::*;
+
+    #[test]
+    fn add_two_and_two() {
+        assert_eq!(4, add_two(2))
+    }
+
+    #[test]
+    fn add_three_and_two() {
+        assert_eq!(5, add_two(3))
+    }
+
+    #[test]
+    fn one_hundred() {
+        assert_eq!(102, add_two(100))
+    }
 }
