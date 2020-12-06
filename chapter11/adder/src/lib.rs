@@ -7,9 +7,18 @@ pub fn prints_and_retunrs_10(a: i32) -> i32 {
     10
 }
 
+fn internal_adder(a: i32, b: i32) -> i32 {
+    a + b
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn internal() {
+        assert_eq!(4, internal_adder(2, 2))
+    }
 
     #[test]
     fn test_will_pass() {
