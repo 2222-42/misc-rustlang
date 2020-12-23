@@ -34,6 +34,20 @@ fn main() {
     let simulated_user_specified_value = 15;
     let simulated_random_number = 3;
     generate_workout(simulated_user_specified_value, simulated_random_number);
+
+    let x = 4;
+    let equal_to_x = |z| z == x;
+    // fn equal_to_x(z: i32) -> bool {
+    //     z == x
+    // };
+    let y = 4;
+    assert!(equal_to_x(y));
+
+    let x = vec![1, 2, 3];
+    let equal_to_x = move |z| z == x;
+    // println!("{:?}", x);
+    let y = vec![1, 2, 3];
+    assert!(equal_to_x(y));
 }
 
 fn simulated_expensive_calculation(intensity: u32) -> u32 {
