@@ -2,6 +2,10 @@
 //!
 //! A library for modeling artistic concepts.
 
+pub use kinds::PrimaryColor;
+pub use kinds::SecondaryColor;
+pub use utils::mix;
+
 pub mod kinds {
     /// The primary colors according to the RYB color model.
     pub enum PrimaryColor {
