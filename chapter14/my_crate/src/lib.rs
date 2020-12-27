@@ -1,3 +1,8 @@
+//! # My Crate
+//!
+//! `my_crate` is a collection of utilities to make performing ceratin
+//! calculations more covenient
+
 /// Adds one to the number given.
 ///
 /// # Examples
