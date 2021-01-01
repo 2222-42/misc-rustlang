@@ -16,9 +16,11 @@ impl<T> Deref for MyBox<T> {
     }
 }
 
+fn hello(name: &str) {
+    println!("Hello, {}!", name);
+}
+
 fn main() {
-    let x = 5;
-    let y = MyBox::new(x);
-    assert_eq!(5, x);
-    assert_eq!(5, *y);
+    let name = MyBox::new(String::from("Rust"));
+    hello(&name);
 }
