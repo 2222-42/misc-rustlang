@@ -36,28 +36,28 @@ where T: Messanger{
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::cell::RefCell;
 
     struct MockMessanger {
-        sent_messages: Vec<String>,
+        sent_messages: RefCell<Vec<String>>,
     }
     
     impl MockMessanger {
         fn new() -> MockMessanger {
-            MockMessanger{sent_messages: vec![]}
+            MockMessanger{sent_messages: RefCell::new(vec![])}
         }
     }
 
     impl Messanger for MockMessanger {
-        fn send(&mut self, message: &str) {
-            self.sent_messages.push(String::from(message))
+        fn send(&self, message: &str) {
+            self.sent_messages.borrow_mut().push(String::from(message));
         }
-
     }
     #[test]
     fn it_sends_an_over_75_percent_warning_message() {
         let mock_messanger = MockMessanger::new();
         let mut limit_tracker = LimitTracker::new(&mock_messanger, 100);
         limit_tracker.set_value(80);
-        assert_eq!(mock_messanger.sent_messages.len(), 1)
+        assert_eq!(mock_messanger.sent_messages.borrow().len(), 1);
     }
 }
