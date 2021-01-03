@@ -50,7 +50,10 @@ mod tests {
 
     impl Messanger for MockMessanger {
         fn send(&self, message: &str) {
-            self.sent_messages.borrow_mut().push(String::from(message));
+            let mut one_borrow = self.sent_messages.borrow_mut();
+            // let mut two_borrow = self.sent_messages.borrow_mut();
+            one_borrow.push(String::from(message));
+            // two_borrow.push(String::from(message));
         }
     }
     #[test]
