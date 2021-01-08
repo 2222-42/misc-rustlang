@@ -6,7 +6,17 @@ fn main() {
 
     thread::spawn(move || {
         let val = String::from("hi");
-        tx.send(val).unwrap();
+        // tx.send(val).unwrap();
+        let result = tx.send(val);
+        match result {
+            Err(error) => {
+                println!("The receiver is dropped: {}", error);
+                // to do something to exit thread.
+            }
+            _ => {
+                println!("Sent.");
+            }
+        }
     });
 
     let received = rx.recv().unwrap();
