@@ -16,7 +16,8 @@ fn main() {
             _ => {
                 println!("Sent.");
             }
-        }
+        };
+        // println!("val is {}", val)
     });
 
     let received = rx.recv().unwrap();
