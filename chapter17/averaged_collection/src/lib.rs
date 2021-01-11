@@ -4,6 +4,13 @@ pub struct AveragedCollection {
 }
 
 impl AveragedCollection {
+    pub fn new() -> AveragedCollection {
+        AveragedCollection {
+            list: vec![],
+            average: 0.0,
+        }
+    }
+
     pub fn add(&mut self, value: i32) {
         self.list.push(value);
         self.update_average();
@@ -27,5 +34,20 @@ impl AveragedCollection {
     fn update_average(&mut self) {
         let total: i32 = self.list.iter().sum();
         self.average = total as f64 / self.list.len() as f64;
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn it_works() {
+        let mut collection = AveragedCollection::new();
+        collection.add(1);
+        collection.add(2);
+        collection.add(3);
+        assert_eq!(2.0, collection.average());
+        collection.remove();
+        assert_eq!(1.5, collection.average());
     }
 }
