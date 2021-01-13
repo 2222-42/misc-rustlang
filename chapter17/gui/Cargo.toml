@@ -1,5 +1,5 @@
 [package]
-name = "sample_trait_object"
+name = "gui"
 version = "0.1.0"
 authors = ["2222-42 <stephen0617@me.com>"]
 edition = "2018"
