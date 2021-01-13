@@ -6,6 +6,14 @@ pub struct Screen {
     pub components: Vec<Box<Draw>>,
 }
 
+// pub trait Clone {
+//     fn clone(&self) -> Self;
+// }
+
+// pub struct ScreenWithSelf {
+//     pub components: Vec<Clone>,
+// }
+
 impl Screen {
     pub fn run(&self) {
         for component in self.components.iter() {
