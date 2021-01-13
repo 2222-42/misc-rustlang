@@ -14,18 +14,15 @@ impl Screen {
     }
 }
 
-pub struct ScreenWithGeneric<T: Draw> {
-    pub components: Vec<T>,
+pub struct Button {
+    pub width: u32,
+    pub height: u32,
+    pub label: String,
 }
 
-impl<T> ScreenWithGeneric<T>
-where
-    T: Draw,
-{
-    pub fn run(&self) {
-        for component in self.components.iter() {
-            component.draw();
-        }
+impl Draw for Button {
+    fn draw(&self) {
+        println!("Drawing Button!");
     }
 }
 
