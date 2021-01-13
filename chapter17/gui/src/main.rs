@@ -32,6 +32,7 @@ fn main() {
                 height: 10,
                 label: String::from("OK"),
             }),
+            // Box::new(String::from("Hi")),
         ],
     };
 
