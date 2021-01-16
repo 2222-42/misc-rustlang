@@ -35,12 +35,31 @@ pub struct PendingReviewPost {
 }
 
 impl PendingReviewPost {
+    pub fn reject(self) -> DraftPost {
+        DraftPost {
+            content: self.content,
+        }
+    }
+
+    pub fn approve(self) -> OneApprovedPost {
+        OneApprovedPost {
+            content: self.content,
+        }
+    }
+}
+
+pub struct OneApprovedPost {
+    content: String,
+}
+
+impl OneApprovedPost {
+    pub fn reject(self) -> DraftPost {
+        DraftPost {
+            content: self.content,
+        }
+    }
+
     pub fn approve(self) -> Post {
-        // if self.count > 0 {
-        //     Box::new(Published {})
-        // } else {
-        //     Box::new(PendingReview { count: 1 })
-        // }
         Post {
             content: self.content,
         }

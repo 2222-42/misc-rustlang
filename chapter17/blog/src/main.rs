@@ -9,26 +9,15 @@ fn main() {
     let post = post.request_review();
 
     let post = post.approve();
-    // assert_eq!("", post.content())
-    assert_eq!("I ate a salad for lunch today", post.content());
 
-    // post.reject();
-    // assert_eq!("", post.content());
+    let mut post = post.reject();
 
-    // post.add_text("I ate two salads for lunch today");
-    // assert_eq!("", post.content());
+    post.add_text(".");
 
-    // post.approve();
-    // assert_eq!("", post.content());
+    let post = post.request_review();
 
-    // post.request_review();
-    // assert_eq!("", post.content());
+    let post = post.approve();
 
-    // post.add_text("I ate three salads for lunch today");
-    // assert_eq!("", post.content());
-
-    // post.approve();
-    // assert_eq!("", post.content());
-    // post.approve();
-    // assert_eq!("I ate two salads for lunch today", post.content());
+    let post = post.approve();
+    assert_eq!("I ate a salad for lunch today.", post.content());
 }
