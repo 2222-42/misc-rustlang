@@ -63,7 +63,7 @@ impl State for Draft {
     }
 
     fn request_review(self: Box<Self>) -> Box<State> {
-        Box::new(PendingReview {})
+        Box::new(PendingReview { count: 0 })
     }
 
     fn reject(self: Box<Self>) -> Box<State> {
@@ -75,7 +75,9 @@ impl State for Draft {
     }
 }
 
-struct PendingReview {}
+struct PendingReview {
+    count: u32,
+}
 
 impl State for PendingReview {
     fn add_text<'a>(&self, post: &'a Post, text: &'a str) -> &'a str {
@@ -91,7 +93,11 @@ impl State for PendingReview {
     }
 
     fn approve(self: Box<Self>) -> Box<State> {
-        Box::new(Published {})
+        if self.count > 0 {
+            Box::new(Published {})
+        } else {
+            Box::new(PendingReview { count: 1 })
+        }
     }
 }
 
