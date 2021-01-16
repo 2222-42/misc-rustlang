@@ -45,6 +45,8 @@ impl Post {
 
 trait State {
     fn add_text<'a>(&self, post: &'a Post, text: &'a str) -> &'a str;
+    // Not able to borrow mutably and imutably at same time.
+    // fn add_text(&self, post: &mut Post, text: &str);
     fn request_review(self: Box<Self>) -> Box<State>;
     fn reject(self: Box<Self>) -> Box<State>;
     fn approve(self: Box<Self>) -> Box<State>;
