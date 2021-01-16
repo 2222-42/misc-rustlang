@@ -12,7 +12,12 @@ impl Post {
     }
 
     pub fn add_text(&mut self, text: &str) {
-        self.content.push_str(text);
+        self.content = self
+            .state
+            .as_ref()
+            .unwrap()
+            .add_text(&self, &text)
+            .to_string()
     }
 
     pub fn content(&self) -> &str {
@@ -39,6 +44,7 @@ impl Post {
 }
 
 trait State {
+    fn add_text<'a>(&self, post: &'a Post, text: &'a str) -> &'a str;
     fn request_review(self: Box<Self>) -> Box<State>;
     fn reject(self: Box<Self>) -> Box<State>;
     fn approve(self: Box<Self>) -> Box<State>;
@@ -50,6 +56,10 @@ trait State {
 struct Draft {}
 
 impl State for Draft {
+    fn add_text<'a>(&self, post: &'a Post, text: &'a str) -> &'a str {
+        text
+    }
+
     fn request_review(self: Box<Self>) -> Box<State> {
         Box::new(PendingReview {})
     }
@@ -66,6 +76,10 @@ impl State for Draft {
 struct PendingReview {}
 
 impl State for PendingReview {
+    fn add_text<'a>(&self, post: &'a Post, text: &'a str) -> &'a str {
+        &post.content
+    }
+
     fn request_review(self: Box<Self>) -> Box<State> {
         self
     }
@@ -82,6 +96,10 @@ impl State for PendingReview {
 struct Published {}
 
 impl State for Published {
+    fn add_text<'a>(&self, post: &'a Post, text: &'a str) -> &'a str {
+        &post.content
+    }
+
     fn request_review(self: Box<Self>) -> Box<State> {
         self
     }
