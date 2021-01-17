@@ -3,6 +3,12 @@ fn main() {
     let is_tuesday = false;
     let age: Result<u8, _> = "34".parse();
 
+    // let Some(color) = favorite_color;
+
+    // if let x = 5 {
+    //     println!("{}", x);
+    // }
+
     if let Some(color) = favorite_color {
         println!("Using your favorite color, {}, as the background", color);
     } else if is_tuesday {
