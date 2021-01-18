@@ -7,6 +7,23 @@ enum Message {
 
 impl Message {
     fn call(&self) {}
+
+    fn matching(&self) {
+        match self {
+            Message::Quit => {
+                println!("The Quit variant has no data to destructure.");
+            }
+            Message::Move { x, y } => {
+                println!("Move in the x direction {} and in the y direction {}", x, y);
+            }
+            Message::Write(_text) => {
+                println!("Text message: {}", _text);
+            }
+            Message::ChangeColor(r, g, b) => {
+                println!("Change the color to red {}, green {}, and blue {}", r, g, b)
+            }
+        }
+    }
 }
 
 // struct QuitMessage;
@@ -20,5 +37,14 @@ impl Message {
 fn main() {
     let m = Message::Write(String::from("hello"));
     m.call();
-    println!("Hello, world!");
+    m.matching();
+
+    let m = Message::Quit;
+    m.matching();
+
+    let m = Message::Move { x: 5, y: 10 };
+    m.matching();
+
+    let m = Message::ChangeColor(1, 2, 3);
+    m.matching();
 }
