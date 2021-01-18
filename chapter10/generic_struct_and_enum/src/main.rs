@@ -32,6 +32,18 @@ impl SimplePoint<f32> {
 
 fn main() {
     let both_integer = Point { x: 5, y: 10 };
+
+    let Point { x: a, y: b } = both_integer;
+    assert_eq!(5, a);
+    assert_eq!(10, b);
+    let Point { x, y } = both_integer;
+    assert_eq!(5, x);
+    assert_eq!(10, y);
+    match both_integer {
+        Point { x, y: 0 } => println!("On the x axis at {}", x),
+        Point { x: 0, y } => println!("On the y axis at {}", y),
+        Point { x, y } => println!("On neigher axis: ({},{})", x, y),
+    }
     let both_float = Point { x: 1.0, y: 4.0 };
     let integer_and_float = Point { x: 5, y: 4.0 };
 
@@ -48,4 +60,11 @@ fn main() {
     );
 
     // point.distance_from_origin();
+
+    let p = Point { x: 0, y: 7 };
+    match p {
+        Point { x, y: 0 } => println!("On the x axis at {}", x),
+        Point { x: 0, y } => println!("On the y axis at {}", y),
+        Point { x, y } => println!("On neigher axis: ({},{})", x, y),
+    }
 }
