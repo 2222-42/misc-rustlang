@@ -68,6 +68,8 @@ fn main() {
         Point { x, y } => println!("On neigher axis: ({},{})", x, y),
     }
 
+    let ((feet, inches), Point { x, y }) = ((3, 10), Point { x: 3, y: -10 });
+
     let points = vec![
         &Point { x: 0, y: 0 },
         &Point { x: 1, y: 5 },
