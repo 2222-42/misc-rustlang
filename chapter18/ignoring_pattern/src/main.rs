@@ -25,4 +25,15 @@ fn main() {
             println!("Some numbers: {}, {}, {}", first, third, fifth)
         }
     }
+
+    let x = 5;
+    let _y = 10;
+
+    let s = Some(String::from("hello"));
+    // if let Some(_s) = s {
+    if let Some(_) = s {
+        println!("found a string");
+    }
+
+    println!("{:?}", s)
 }
