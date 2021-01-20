@@ -10,7 +10,7 @@ fn main() {
 
     match (setting_value, new_setting_value) {
         (Some(_), Some(_)) => {
-            println!("Can't overwrite an existing customized value")
+            println!("Can't overwrite an existing customized value");
         }
         _ => {
             setting_value = new_setting_value;
@@ -22,7 +22,22 @@ fn main() {
     let numbers = (2, 4, 8, 16, 32);
     match numbers {
         (first, _, third, _, fifth) => {
-            println!("Some numbers: {}, {}, {}", first, third, fifth)
+            println!("Some numbers: {}, {}, {}", first, third, fifth);
+        }
+    }
+
+    match numbers {
+        (first, .., last) => {
+            println!("Some numbers: {}, {}", first, last);
+        }
+    }
+
+    match numbers {
+        // (.., second, ..) => {
+        //     println!("Some number: {}", second);
+        // }
+        (_, second, ..) => {
+            println!("Some number: {}", second);
         }
     }
 
