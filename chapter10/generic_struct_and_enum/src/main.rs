@@ -44,8 +44,12 @@ fn main() {
         Point { x: 0, y } => println!("On the y axis at {}", y),
         Point { x, y } => println!("On neigher axis: ({},{})", x, y),
     }
+
+    match both_integer {
+        Point { x, .. } => println!("x is {}", x),
+    }
     let both_float = Point { x: 1.0, y: 4.0 };
-    let integer_and_float = Point { x: 5, y: 4.0 };
+    let _integer_and_float = Point { x: 5, y: 4.0 };
 
     let new_pointer = both_integer.mixup(both_float);
     println!("{:?}", new_pointer);
@@ -68,7 +72,7 @@ fn main() {
         Point { x, y } => println!("On neigher axis: ({},{})", x, y),
     }
 
-    let ((feet, inches), Point { x, y }) = ((3, 10), Point { x: 3, y: -10 });
+    let ((_feet, _inches), Point { x, y }) = ((3, 10), Point { x: 3, y: -10 });
 
     let points = vec![
         &Point { x: 0, y: 0 },
