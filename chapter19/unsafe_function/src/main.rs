@@ -17,6 +17,11 @@ extern "C" {
     fn abs(input: i32) -> i32;
 }
 
+#[no_mangle]
+pub extern "C" fn call_from_c() {
+    println!("Just called a Rust function from C!");
+}
+
 fn main() {
     unsafe fn dangerous() {}
 
@@ -26,7 +31,7 @@ fn main() {
 
     let mut v = vec![1, 2, 3, 4, 5, 6];
     let r = &mut v[..];
-    let (a, b) = r.split_at_mut(3);
+    let (a, b) = split_at_mut(r, 3);
     assert_eq!(a, &mut [1, 2, 3]);
     assert_eq!(b, &mut [4, 5, 6]);
 
