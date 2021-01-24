@@ -8,6 +8,7 @@ impl Counter {
     }
 }
 
+// Iteratorが関連型ではなく、ジェネリックを使うと、`impl Iterator<u32> for Counter` など型注釈を付けねばならず、また、複数回実装ができることになってしまう。
 impl Iterator for Counter {
     type Item = u32;
 
