@@ -1,3 +1,5 @@
+use std::ops::Add;
+
 #[derive(Debug)]
 struct Point<T, U> {
     x: T,
@@ -13,9 +15,20 @@ impl<T, U> Point<T, U> {
     }
 }
 
+#[derive(Debug, PartialEq)]
 struct SimplePoint<T> {
     x: T,
     y: T,
+}
+
+impl Add for SimplePoint<i32> {
+    type Output = SimplePoint<i32>;
+    fn add(self, other: SimplePoint<i32>) -> SimplePoint<i32> {
+        SimplePoint::<i32> {
+            x: self.x + other.x,
+            y: self.y + other.y,
+        }
+    }
 }
 
 impl<T> SimplePoint<T> {
@@ -48,6 +61,12 @@ fn main() {
     match both_integer {
         Point { x, .. } => println!("x is {}", x),
     }
+
+    assert_eq!(
+        SimplePoint { x: 1, y: 0 } + SimplePoint { x: 2, y: 3 },
+        SimplePoint { x: 3, y: 3 }
+    );
+
     let both_float = Point { x: 1.0, y: 4.0 };
     let _integer_and_float = Point { x: 5, y: 4.0 };
 
