@@ -53,7 +53,7 @@ fn main() {
             .expect("Failed to read line");
         let guess: u32 = match guess.trim().parse() {
             Ok(num) => Guess::new(num).value(),
-            Err(_) => continue,
+            Err(_) => continue, // The type of continue is `!`, so the type of this match is `u32`
         };
         println!("You guessed: {}", guess);
         match guess.cmp(&secret_number) {
