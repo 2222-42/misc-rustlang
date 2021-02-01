@@ -5,13 +5,15 @@ fn main() {
 
     for stream in listner.incoming() {
         let stream = stream.unwrap();
-        handle_connection(stream);
+        thread::spawn(||{
+            handle_connection(stream);
+        });
     }
 }
 
 fn handle_connection(mut stream: TcpStream) {
     let mut buffer = [0;1024];
-    stream.read(&mut buffer).unwrap();;
+    stream.read(&mut buffer).unwrap();
     // println!("Request: {}", String::from_utf8_lossy(&buffer[..]));
 
     let get = b"GET / HTTP/1.1\r\n";
