@@ -1,5 +1,3 @@
-extern crate hello;
-use hello::ThreadPool;
 use std::{fs::File, io::prelude::*, net::{TcpListener, TcpStream}, thread, time::Duration};
 
 fn main() {
