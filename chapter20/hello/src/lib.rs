@@ -39,6 +39,15 @@ pub struct ThreadPool{
     sender: mpsc::Sender<Job>
 }
 
+impl Drop for ThreadPool {
+    fn drop(&mut self) {
+        for worker in &mut self.workers {
+            println!("Shutting down worker {}", worker.id);
+            worker.thread.join().unwrap();
+        }
+    }
+}
+
 impl ThreadPool {
     /// Create a new ThreadPool.
     ///
