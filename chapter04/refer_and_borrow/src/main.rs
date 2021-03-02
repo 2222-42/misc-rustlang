@@ -33,6 +33,7 @@ fn change(some_string: &mut String) {
 
 fn mut_and_immut_borrow() {
     let mut s = String::from("hello");
+    // if r1 and r2 are not unused, there are no error.
     let r1 = &s;
     let r2 = &s;
     // let r3 = &mut s;
