@@ -15,6 +15,12 @@ fn main() {
         children: RefCell::new(vec![]),
     });
 
+    let grandson = Rc::new(Node {
+        value: 7,
+        parent: RefCell::new(Rc::downgrade(&leaf)),
+        children: RefCell::new(vec![]),
+    });
+
     println!("leaf parent = {:?}", leaf.parent.borrow().upgrade());
 
     println!(
@@ -61,5 +67,14 @@ fn main() {
         "leaf strong = {}, weak = {}",
         Rc::strong_count(&leaf),
         Rc::weak_count(&leaf)
+    );
+
+    drop(leaf);
+
+    println!("grandson parent = {:?}", grandson.parent.borrow().upgrade());
+    println!(
+        "grandson strong = {}, weak = {}",
+        Rc::strong_count(&grandson),
+        Rc::weak_count(&grandson)
     );
 }
