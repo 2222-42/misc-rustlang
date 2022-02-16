@@ -1,7 +1,7 @@
-# TRPL_study
+# Rust の勉強ノート
+
+## TRPL2018
 
 TRPL の読書ノート
 
-## 第二版対応
-
-第二版に対応するために、既存のディレクトリを一度、`/first_edition`配下に置く。
+## O'Reilly Rust 2021
