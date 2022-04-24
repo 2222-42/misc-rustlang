@@ -1,4 +1,4 @@
-use std::ops::Add;
+use std::ops::{Add, Neg};
 
 #[derive(Copy, Clone, Debug)]
 pub struct Complex<T> {
@@ -30,6 +30,19 @@ where
         Complex {
             re: self.re + rhs.re,
             im: self.im + rhs.im,
+        }
+    }
+}
+
+impl<T> Neg for Complex<T>
+where
+    T: Neg<Output = T>, // the output of negation should be the same type as the input
+{
+    type Output = Self;
+    fn neg(self) -> Self {
+        Self {
+            re: -self.re,
+            im: -self.im,
         }
     }
 }
