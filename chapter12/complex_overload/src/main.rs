@@ -1,0 +1,39 @@
+use std::ops::Add;
+
+#[derive(Copy, Clone, Debug)]
+pub struct Complex<T> {
+    /// Real portion of the complex number
+    pub re: T,
+    /// Imaginary portion of the complex number
+    pub im: T,
+}
+
+// impl<T> Add for Complex<T>
+// where
+//     T: Add<Output = T>,
+// {
+//     type Output = Self;
+//     fn add(self, rhs: Self) -> Self {
+//         Self {
+//             re: self.re + rhs.re,
+//             im: self.im + rhs.im,
+//         }
+//     }
+// }
+
+impl<L, R> Add<Complex<R>> for Complex<L>
+where
+    L: Add<R>,
+{
+    type Output = Complex<L::Output>;
+    fn add(self, rhs: Complex<R>) -> Self::Output {
+        Complex {
+            re: self.re + rhs.re,
+            im: self.im + rhs.im,
+        }
+    }
+}
+
+fn main() {
+    println!("Hello, world!");
+}
