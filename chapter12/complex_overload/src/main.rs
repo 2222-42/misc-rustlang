@@ -1,4 +1,4 @@
-use std::ops::{Add, Neg};
+use std::ops::{Add, AddAssign, Neg};
 
 #[derive(Copy, Clone, Debug)]
 pub struct Complex<T> {
@@ -44,6 +44,16 @@ where
             re: -self.re,
             im: -self.im,
         }
+    }
+}
+
+impl<T> AddAssign for Complex<T>
+where
+    T: AddAssign<T>,
+{
+    fn add_assign(&mut self, rhs: Self) {
+        self.re += rhs.re;
+        self.im += rhs.im;
     }
 }
 
