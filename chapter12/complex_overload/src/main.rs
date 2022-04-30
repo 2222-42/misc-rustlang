@@ -80,6 +80,8 @@ where
     }
 }
 
+impl<T: Eq> Eq for Complex<T> {}
+
 fn main() {
     let x = Complex { re: 5, im: 2 };
     let y = Complex { re: 2, im: 5 };
