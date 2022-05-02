@@ -1,3 +1,4 @@
+use rand::prelude::*;
 use std::vec;
 
 struct Appellation {
@@ -15,15 +16,34 @@ impl Drop for Appellation {
     }
 }
 
+fn random_condition() -> bool {
+    let mut rng = rand::thread_rng();
+    let y: i32 = rng.gen();
+    y % 2 == 0
+}
+
 fn main() {
-    let mut app = Appellation {
+    let mut _app = Appellation {
         name: String::from("Stephen"),
         nicknames: vec!["2222-42".to_string(), "Daioh".to_string()],
     };
     println!("before assingment");
-    app = Appellation {
+    _app = Appellation {
         name: String::from("Hora"),
         nicknames: vec![],
     };
-    println!("at end of block")
+    println!("at end of block");
+
+    let _p;
+    {
+        let q = Appellation {
+            name: String::from("Zeus"),
+            nicknames: vec!["cloud collector".to_string(), "king of gods".to_string()],
+        };
+        if random_condition() {
+            _p = q;
+        }
+        println!("at end of inner block");
+    }
+    println!("at end of block");
 }
