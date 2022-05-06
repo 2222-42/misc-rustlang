@@ -30,4 +30,16 @@ fn main() {
         Ok(i) => println!("success! {}", i),
         Err(err) => println!("failure! err: {}", err),
     }
+
+    let huge = 2_000_000_000_000i64;
+    let smaller = huge as i32;
+    println!("{}", smaller);
+
+    let smaller2 = huge.try_into().unwrap_or(i32::MAX);
+    println!("{}", smaller2);
+    // Question: where is ownerhsip?
+    let smaller3 = huge
+        .try_into()
+        .unwrap_or_else(|_| if huge >= 0 { i32::MAX } else { i32::MIN });
+    println!("{}", smaller3);
 }
