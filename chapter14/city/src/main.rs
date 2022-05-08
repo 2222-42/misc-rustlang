@@ -1,3 +1,5 @@
+use std::thread;
+
 #[derive(Debug)]
 struct City {
     name: String,
@@ -33,23 +35,33 @@ fn sort_by_statistic(cities: &mut Vec<City>, stat: Statistic) {
     cities.sort_by_key(|city| -city.get_statistic(stat)); // 借用するクロージャらしい。
 }
 
+fn start_sorting_thread(mut cities: Vec<City>, stat: Statistic) -> thread::JoinHandle<Vec<City>> {
+    let key_fn = move |city: &City| -> i64 { -city.get_statistic(stat) }; // statの所有権を取得
+
+    thread::spawn(move || {
+        // citiesとkey_fnの所有権を取得
+        cities.sort_by_key(key_fn);
+        cities
+    })
+}
+
 fn main() {
     let mut cities = vec![
         City {
             name: "Tokyo".to_string(),
             population: 13_822_000,
             country: "Japan".to_string(),
-            cost: 1_000_000,
+            cost: 500_000,
         },
         City {
             name: "Shanghai".to_string(),
             population: 3_904_000,
             country: "China".to_string(),
-            cost: 500_000,
+            cost: 1_000_000,
         },
         City {
             name: "Beijing".to_string(),
-            population: 21_33_332,
+            population: 21_333_332,
             country: "China".to_string(),
             cost: 2_000_000,
         },
@@ -57,5 +69,12 @@ fn main() {
 
     sort_by_statistic(&mut cities, Statistic::Population);
 
-    println!("{:?}", cities);
+    println!("cities: {:?}", cities);
+
+    let stat = Statistic::Cost;
+
+    let result = start_sorting_thread(cities, stat).join().unwrap();
+    println!("cities: {:?}", result); // citiesにはCopy Traitを実装していないので、moveしており、citiesの変数からアクセスできない。
+                                      // citiesを以降で使いたいなら、cloneをして別の変数に格納しましょう。
+    println!("stat: {:?}", stat); // statにはCopy Traitを実装しているので、statの変数からアクセスできる。
 }
