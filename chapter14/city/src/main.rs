@@ -6,6 +6,7 @@ struct City {
     population: i64,
     country: String,
     cost: i64,
+    monsster_attack_risk: f64,
 }
 
 fn sort_cities(cities: &mut Vec<City>) {
@@ -29,6 +30,22 @@ impl City {
             Statistic::Cost => self.cost,
         }
     }
+
+    fn new(
+        name: String,
+        population: i64,
+        country: String,
+        cost: i64,
+        monsster_attack_risk: f64,
+    ) -> City {
+        City {
+            name,
+            population,
+            country,
+            cost,
+            monsster_attack_risk,
+        }
+    }
 }
 
 fn sort_by_statistic(cities: &mut Vec<City>, stat: Statistic) {
@@ -45,26 +62,48 @@ fn start_sorting_thread(mut cities: Vec<City>, stat: Statistic) -> thread::JoinH
     })
 }
 
+fn count_selected_cities<F>(cities: &Vec<City>, test_fn: F) -> usize
+where
+    F: Fn(&City) -> bool, // クロージャを引数に撮れるようにしたいから。
+{
+    let mut count = 0;
+
+    for city in cities {
+        if test_fn(city) {
+            count += 1;
+        }
+    }
+
+    count
+}
+
+fn has_monster_attack(city: &City) -> bool {
+    city.monsster_attack_risk > 0.0
+}
+
 fn main() {
     let mut cities = vec![
-        City {
-            name: "Tokyo".to_string(),
-            population: 13_822_000,
-            country: "Japan".to_string(),
-            cost: 500_000,
-        },
-        City {
-            name: "Shanghai".to_string(),
-            population: 3_904_000,
-            country: "China".to_string(),
-            cost: 1_000_000,
-        },
-        City {
-            name: "Beijing".to_string(),
-            population: 21_333_332,
-            country: "China".to_string(),
-            cost: 2_000_000,
-        },
+        City::new(
+            "Tokyo".to_string(),
+            13_822_000,
+            "Japan".to_string(),
+            500_000,
+            0.5,
+        ),
+        City::new(
+            "Shanghai".to_string(),
+            3_904_000,
+            "China".to_string(),
+            1_000_000,
+            0.2,
+        ),
+        City::new(
+            "Beijing".to_string(),
+            21_333_332,
+            "China".to_string(),
+            2_000_000,
+            0.0,
+        ),
     ];
 
     sort_by_statistic(&mut cities, Statistic::Population);
@@ -72,6 +111,14 @@ fn main() {
     println!("cities: {:?}", cities);
 
     let stat = Statistic::Cost;
+
+    let n = count_selected_cities(&cities, has_monster_attack);
+    println!("The number of cities with monster attack: {}", n);
+
+    let boundary = 1_000_000;
+    let m = count_selected_cities(&cities, |city| city.population > boundary); // city.population > 1_000_000だと通るのはなぜ？？？
+                                                                               // 推測になるが、クロージャ独自の型であっても、一定の条件を満たせば型を暗黙のうちに関数の型(fn型)に変換してくれるのだろう。
+    println!("The number of cities with population > 1,000,000: {}", m);
 
     let result = start_sorting_thread(cities, stat).join().unwrap();
     println!("cities: {:?}", result); // citiesにはCopy Traitを実装していないので、moveしており、citiesの変数からアクセスできない。
