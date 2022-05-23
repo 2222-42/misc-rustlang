@@ -1,6 +1,6 @@
 use image::{png::PNGEncoder, ColorType};
 use num::Complex;
-use std::{fs::File, str::FromStr};
+use std::{fs::File, iter::successors, str::FromStr};
 
 fn main() {
     let args = std::env::args().collect::<Vec<_>>();
@@ -42,14 +42,12 @@ fn main() {
 }
 
 fn escape_time(c: Complex<f64>, limit: usize) -> Option<usize> {
-    let mut z = Complex { re: 0.0, im: 0.0 };
-    for i in 0..limit {
-        if z.norm_sqr() > 4.0 {
-            return Some(i);
-        }
-        z = z * z + c;
-    }
-    None
+    let zero = Complex { re: 0.0, im: 0.0 };
+    successors(Some(zero), |&z| Some(z * z + c))
+        .take(limit)
+        .enumerate()
+        .find(|(_i, z)| z.norm_sqr() > 4.0)
+        .map(|(i, _z)| i)
 }
 
 fn parse_pair<T: FromStr>(s: &str, separtor: char) -> Option<(T, T)> {
