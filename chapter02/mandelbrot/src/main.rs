@@ -2,6 +2,23 @@ use image::{png::PNGEncoder, ColorType};
 use num::Complex;
 use std::{fs::File, iter::successors, str::FromStr};
 
+
+struct Service {
+    
+}
+
+impl Service {
+    fn new() -> Self {
+        Service {
+            
+        }
+    }
+
+    fn run(&self) {
+        self.cleaner_repo;
+    }
+}
+
 fn main() {
     let args = std::env::args().collect::<Vec<_>>();
     if args.len() != 5 {
