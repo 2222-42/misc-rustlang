@@ -10,4 +10,6 @@ fn main() {
 
     assert_eq!(populations.iter().max_by_key(|&(_name, pop)| pop), Some((&"Portland", &583_776)));
     assert_eq!(populations.iter().min_by_key(|&(_name, pop)| pop), Some((&"Greenhorn", &2)));
+    assert_eq!(populations.iter().find(|&(_name, pop)| pop > &1_000_000), None);
+    assert_eq!(populations.iter().find(|&(_name, pop)| pop > &500_000), Some((&"Portland", &583_776)));
 }
