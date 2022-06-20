@@ -1,5 +1,5 @@
-use BinaryTree::*;
-struct TreeIter<'a, T: 'a> {
+use crate::binary_tree::{BinaryTree::{self, *}, TreeNode};
+pub struct TreeIter<'a, T: 'a> {
     unvisited: Vec<&'a TreeNode<T>>
 }
 
@@ -29,7 +29,7 @@ impl <'a, T: 'a> Iterator for TreeIter<'a, T> {
 }
 
 impl<T> BinaryTree<T> {
-    fn iter(&self) -> TreeIter<T> {
+    pub fn iter(&self) -> TreeIter<T> {
         let mut iter = TreeIter { unvisited: Vec::new() };
         iter.push_left_edge(self);
         iter
