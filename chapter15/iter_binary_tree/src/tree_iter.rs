@@ -16,16 +16,12 @@ impl <'a, T: 'a> Iterator for TreeIter<'a, T> {
     type Item = &'a T;
 
     fn next(&mut self) -> Option<Self::Item> {
-        // if let Some(node) = self.unvisited.pop() {
-        //     self.push_left_edge(&node.right);
-        //     Some(&node.element)
-        // } else {
-        //     None
-        // }
         let node = self.unvisited.pop()?;
         self.push_left_edge(&node.right);
         Some(&node.element)
     }
+
+    // ベクタへの変換の実装をするなら、size_hint()を実装したほうがバッファの拡張のコストが下がる。
 }
 
 impl<T> BinaryTree<T> {
@@ -41,5 +37,15 @@ impl<'a, T: 'a> IntoIterator for &'a BinaryTree<T> {
     type IntoIter = TreeIter<'a, T>;
     fn into_iter(self) -> Self::IntoIter {
         self.iter()
+    }
+}
+
+impl <T: Ord> FromIterator<T> for BinaryTree<T> {
+    fn from_iter<I: IntoIterator<Item=T>>(iter: I) -> Self {
+        let mut tree = Empty;
+        for x in iter {
+            tree.add(x);
+        }
+        tree
     }
 }
