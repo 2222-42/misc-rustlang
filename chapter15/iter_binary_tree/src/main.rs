@@ -29,9 +29,9 @@ fn main() {
         vec!["number-03", "number-04", "number-05", "number-06", "number-07", "number-08", "number-09", "number-10", "number-11", "number-13", "number-14"]
     );
 
-    let iter = [10,4,8,3,7,9,5,6,13,11,14];
-    let tree = BinaryTree::from_iter(iter.iter().cloned());
-    // let tree: BinaryTree<i32> = iter.iter().cloned().collect();
+    let vec = [10,4,8,3,7,9,5,6,13,11,14];
+    let tree = BinaryTree::from_iter(vec.iter().cloned());
+    // let tree: BinaryTree<i32> = vec.iter().cloned().collect();
     assert_eq!(
         tree.iter().map(|x| format!("number-{}", x)).collect::<Vec<_>>(), 
         vec!["number-3", "number-4", "number-5", "number-6", "number-7", "number-8", "number-9", "number-10", "number-11", "number-13", "number-14"]);
