@@ -35,4 +35,7 @@ fn main() {
     assert_eq!(
         tree.iter().map(|x| format!("number-{}", x)).collect::<Vec<_>>(), 
         vec!["number-3", "number-4", "number-5", "number-6", "number-7", "number-8", "number-9", "number-10", "number-11", "number-13", "number-14"]);
+
+    let tree2: BinaryTree<i32> = vec.iter().cloned().collect();
+    assert_eq!(90, tree2.iter().fold(0, |n, i| n + i));
 }
