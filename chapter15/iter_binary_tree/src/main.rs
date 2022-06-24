@@ -38,4 +38,6 @@ fn main() {
 
     let tree2: BinaryTree<i32> = vec.iter().cloned().collect();
     assert_eq!(90, tree2.iter().fold(0, |n, i| n + i));
+
+    // tree.iter().map(|x| format!("number-{}", x));
 }
