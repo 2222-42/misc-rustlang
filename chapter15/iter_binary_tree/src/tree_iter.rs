@@ -40,6 +40,14 @@ impl<'a, T: 'a> IntoIterator for &'a BinaryTree<T> {
     }
 }
 
+// impl<'a, T: 'a> IntoIterator for &'a mut BinaryTree<T> {
+//     type Item = T;
+//     type IntoIter = TreeIterMut<'a, T>;
+//     fn into_iter(self) -> Self::IntoIter {
+//         self.iter_mut()
+//     }
+// }
+
 impl <T: Ord> FromIterator<T> for BinaryTree<T> {
     fn from_iter<I: IntoIterator<Item=T>>(iter: I) -> Self {
         let mut tree = Empty;
